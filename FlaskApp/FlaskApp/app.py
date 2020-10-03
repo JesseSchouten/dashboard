@@ -21,5 +21,9 @@ def articles():
 def article(id):
     return render_template('article.html', id=id)
 
+@app.route('/analysis') #the url in the app.
+def analysis():
+    return render_template('analysis.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

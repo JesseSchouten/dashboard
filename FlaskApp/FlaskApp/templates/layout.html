@@ -3,14 +3,16 @@
     <head>
         <meta charset="utf-8">
         <title>MyFlaskApp</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!--from https://www.bootstrapcdn.com/ -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css"
+        href="static/css/style1.css">
     </head>
     <body>
         {% include 'includes/_navbar.html' %}
-
-        {% block body %}  {% endblock %}
-
-        <script type="text/javascript",src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+        <div class="container">
+            {% block body %}  {% endblock %}
+        </div>
+        <script type="text/javascript",src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
     </body>
 </html>

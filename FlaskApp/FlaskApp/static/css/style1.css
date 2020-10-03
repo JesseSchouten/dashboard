@@ -1,0 +1,19 @@
+.navbar-brand{
+    background-image:url('../images/jesse_50x50.png');
+    background-position: top left;
+    background-repeat: no-repeat;
+	background-position: 1px;
+    height: 50px;
+    margin-bottom: 0px;
+    text-align: left;
+    padding-left: 55px;
+	padding-top:0em;
+    position:relative;
+}
+
+.container{
+    width:100%;
+    margin:auto;
+    overflow: hidden;
+    padding-top:1em;
+}
