@@ -11,10 +11,9 @@
     <body>
         {% include 'includes/_navbar.html' %}
 
-        <div class=container>
-            {% include 'includes/_messages.html' %}
-            {% block body %}  {% endblock %}
-        </div>
+        {% include 'includes/_messages.html' %}
+        {% block body %}  {% endblock %}
+
         <script type="text/javascript",src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
 
     </body>

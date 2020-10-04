@@ -1,0 +1,17 @@
+{% extends 'layout_dashboard.html' %}
+
+{% block body %}
+<div class="sidebar">
+  <a class="active" href="#home">Dashboard</a>
+  <a href="#page1">Dashboard 1</a>
+  <a href="#page2">Dashboard 2</a>
+  <a href="#page3">Dashboard 3</a>
+</div>
+
+<!-- Page content -->
+<div class="content">
+    <h1>Dashboard<small> - Welcome {{session.username}}</small></h1>
+    <p class='lead'>This page should contain some tabs with visualizations and models, to explore some data when logged into the system.</p>
+</div>
+
+{% endblock %}
