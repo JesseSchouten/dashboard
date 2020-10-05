@@ -1,4 +1,4 @@
 #Environments
 FlaskApp/venv/
 #.py files
-FlaskApp/credentials/mysql_credentials.py
+FlaskApp/FlaskApp/credentials/mysql_credentials.py
