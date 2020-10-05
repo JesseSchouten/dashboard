@@ -129,10 +129,15 @@ def logout():
     flash('You are now logged out.', 'success')
     return redirect(url_for('login'))
 
-@app.route('/dashboard')
+@app.route('/home_dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html', show_sidebar=True)
+    return render_template('dashboard.html')
+
+@app.route('/dashboard1')
+@login_required
+def dashboard_1():
+    return render_template('dashboard1.html')
 
 
 if __name__ == '__main__':
