@@ -5,7 +5,7 @@ CREATE TABLE dashboard.users(
 id INT AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(100),
 email VARCHAR(100),
-username VARCHAR(30),
+username blob,
 password VARCHAR(100),
 permissions VARCHAR(30) DEFAULT 'user',
 register_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),

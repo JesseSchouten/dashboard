@@ -10,7 +10,6 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Alkmaar12!'
-#app.config['MYSQL_DB'] = 'authenticate'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 # init MYSQL
@@ -39,10 +38,10 @@ def register():
             cur.execute("INSERT INTO dashboard.users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username,(password)))
         except Exception as e:
             if type(e).__name__ == 'IntegrityError':
-                flash('This user already exists!')
+                flash('This username already exists!', 'danger')
                 return render_template('register.html', form=form)
             else:
-                flash('An unknown error occurred, try again!')
+                flash('An unknown error occurred, try again!', 'danger')
                 return render_template('register.html', form=form)
         #commit to db
         mysql.connection.commit()
@@ -116,8 +115,7 @@ def articles():
     if result > 0:
         return render_template('articles.html', articles=articles)
     else:
-        msg = 'No Articles Found'
-        return render_template('articles.html', msg=msg)
+        return render_template('articles.html')
 
 @app.route('/article/<string:id>') #the url in the app.
 @login_required
