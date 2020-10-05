@@ -1,2 +1,4 @@
 #Environments
 FlaskApp/venv/
+#.py files
+FlaskApp/credentials/credentials.py
