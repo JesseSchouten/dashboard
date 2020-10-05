@@ -1,5 +1,4 @@
 from flask import Flask, render_template, flash, request, redirect, url_for, session, logging
-from data import article_func
 from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
@@ -11,13 +10,11 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Alkmaar12!'
-app.config['MYSQL_DB'] = 'authenticate'
+#app.config['MYSQL_DB'] = 'authenticate'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 # init MYSQL
 mysql = MySQL(app)
-
-article_list = article_func()
 
 @app.route('/')
 def index():
@@ -29,11 +26,29 @@ def about():
 
 @app.route('/articles') #the url in the app.
 def articles():
-    return render_template('articles.html', articles = article_list)
+    #Create cursor
+    cursor = mysql.connection.cursor()
+
+    #Get articles
+    result = cursor.execute("SELECT * FROM dashboard.articles")
+
+    articles = cursor.fetchall()
+
+    if result > 0:
+        return render_template('articles.html', articles=articles)
+    else:
+        msg = 'No Articles Found'
+        return render_template('articles.html', msg=msg)
 
 @app.route('/article/<string:id>') #the url in the app.
 def article(id):
-    return render_template('article.html', id=id)
+    cursor = mysql.connection.cursor()
+
+    #Get articles
+    result = cursor.execute("SELECT * FROM dashboard.articles WHERE id = %s", [id])
+    article = cursor.fetchone()
+
+    return render_template('article.html', article=article)
 
 class RegisterForm(Form):
     name = StringField('Name',[validators.Length(min=1, max=50)])
@@ -57,7 +72,7 @@ def register():
         #create cursor
         cur = mysql.connection.cursor()
         try:
-            cur.execute("INSERT INTO authenticate.users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username,(password)))
+            cur.execute("INSERT INTO dashboard.users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username,(password)))
         except Exception as e:
             if type(e).__name__ == 'IntegrityError':
                 flash('This user already exists!')
@@ -88,7 +103,7 @@ def login():
         cursor = mysql.connection.cursor()
 
         #Get user by Username
-        result = cursor.execute("SELECT * FROM authenticate.users WHERE BINARY username = %s", [username])
+        result = cursor.execute("SELECT * FROM dashboard.users WHERE BINARY username = %s", [username])
 
         if result > 0:
             #Get stored hash
@@ -98,9 +113,10 @@ def login():
             if sha256_crypt.verify(password_candidate, password):
                 session['logged_in'] = True
                 session['username'] = username
+                session['permissions'] = data['permissions']
 
                 flash('You are now logged in.', 'success')
-                return redirect(url_for('dashboard'))
+                return redirect(url_for('index'))
             else:
                 error = "Invalid login"
                 return render_template('login.html', error=error)
@@ -124,6 +140,7 @@ def login_required(f):
 
 #logout
 @app.route('/logout')
+@login_required
 def logout():
     session.clear()
     flash('You are now logged out.', 'success')
@@ -132,13 +149,118 @@ def logout():
 @app.route('/home_dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    #Create cursor
+    cursor = mysql.connection.cursor()
+
+    #Get articles
+    if session['permissions'] == 'admin':
+        result = cursor.execute("SELECT * FROM dashboard.articles;")
+    else:
+        result = cursor.execute("SELECT * FROM dashboard.articles WHERE author = %s", [session['username']])
+    articles = cursor.fetchall()
+
+    if result > 0:
+        return render_template('dashboard.html', articles=articles)
+    else:
+        return render_template('dashboard.html')
+
+#Article Form Class
+class ArticleForm(Form):
+    title = StringField('Name',[validators.Length(min=1, max=200)])
+    body = TextAreaField('Text',[validators.Length(min=30)])
+
+@app.route('/add_article', methods=['GET', 'POST'])
+@login_required
+def add_article():
+    form = ArticleForm(request.form)
+    if request.method == 'POST' and form.validate():
+        title = form.title.data
+        body = form.body.data
+
+        #Create DictCursor
+        cursor = mysql.connection.cursor()
+
+        #Execute
+        cursor.execute("INSERT INTO dashboard.articles(title, body, author) VALUES(%s, %s, %s)", (title, body, session['username']))
+
+        #Commit
+        mysql.connection.commit()
+
+        #Close connection
+        cursor.close()
+
+        flash('Article Created', 'success')
+
+        return redirect(url_for('dashboard'))
+    return render_template('add_article.html', form=form)
+
+@app.route('/edit_article/<string:id>', methods=['GET', 'POST'])
+@login_required
+def edit_article(id):
+    #Create cursor
+    cursor = mysql.connection.cursor()
+
+    #Get article by id
+    result = cursor.execute("SELECT * FROM dashboard.articles WHERE id=%s", [id])
+
+    article = cursor.fetchone()
+
+    #Get form
+    form = ArticleForm(request.form)
+
+    #Populate article form fields
+    form.title.data = article['title']
+    form.body.data = article['body']
+
+    if request.method == 'POST' and form.validate():
+        title = request.form['title']
+        body = request.form['body']
+
+        #Create DictCursor
+        cursor = mysql.connection.cursor()
+
+        #Execute
+        cursor.execute("UPDATE dashboard.articles SET title = %s, body = %s WHERE id = %s", (title, body, id))
+
+        #Commit
+        mysql.connection.commit()
+
+        #Close connection
+        cursor.close()
+
+        flash('Article Updated', 'success')
+
+        return redirect(url_for('dashboard'))
+    return render_template('add_article.html', form=form)
+
+#Delete article
+@app.route('/delete_article/<string:id>', methods=['POST'])
+@login_required
+def delete_article(id):
+    #Create cursor
+    cursor = mysql.connection.cursor()
+
+    #Execute
+    cursor.execute("DELETE FROM dashboard.articles WHERE id = %s", [id])
+
+    #Commit
+    mysql.connection.commit()
+
+    #Close connection
+    cursor.close()
+
+    flash('Article Deleted', 'success')
+
+    return redirect(url_for('dashboard'))
 
 @app.route('/dashboard1')
 @login_required
 def dashboard_1():
-    return render_template('dashboard1.html')
-
+    if session['permissions'] == 'admin':
+        return render_template('dashboard1.html')
+    else:
+        flash('Permission Denied', 'danger')
+        return render_template('dashboard.html')
 
 if __name__ == '__main__':
     app.secret_key = 'my_secret_key'

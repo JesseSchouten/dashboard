@@ -43,12 +43,15 @@
   color: white;
 }
 
+.edit_button {
+    float: right;
+}
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {
   margin-left: 200px;
+  margin-right: 100px;
   height: 1000px;
   padding-top: 1em;
-  padding-left: 0px;
 }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */

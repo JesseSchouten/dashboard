@@ -1,21 +1,5 @@
-#authentication database
-CREATE DATABASE authenticate;
-CREATE TABLE authenticate.users(
-id INT AUTO_INCREMENT PRIMARY KEY,
-name VARCHAR(100),
-email VARCHAR(100),
-username VARCHAR(30),
-password VARCHAR(100),
-register_date TIMESTAMP default current_timestamp,
-UNIQUE KEY `u_k_1`(username)
- );
-DROP TABLE authenticate.users;
-
-INSERT INTO users(name, email, username, password) VALUES(1,2,3,4);
-
 #churn database
 CREATE DATABASE churn_project;
-DROP TABLE churn_project.churn;
 
 CREATE TABLE churn_project.churn (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
