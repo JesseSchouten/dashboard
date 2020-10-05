@@ -4,13 +4,21 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 
+import sys
+
+
 app = Flask(__name__)
 
 # Config MySQL
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Alkmaar12!'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+try:
+    from credentials.mysql_credentials import credentials as mysql_credentials
+    app.config['MYSQL_HOST'] = mysql_credentials['mysql_host']
+    app.config['MYSQL_USER'] = mysql_credentials['mysql_username']
+    app.config['MYSQL_PASSWORD'] = mysql_credentials['mysql_password']
+    app.config['MYSQL_CURSORCLASS'] = mysql_credentials['mysql_cursorclass']
+except ModuleNotFoundError:
+    print("MySQL credential file does not exist, please add the file credentials/mysql_credentials.py. For more info, check the credentials/credentials_example.py file. ")
+    sys.exit()
 
 # init MYSQL
 mysql = MySQL(app)
