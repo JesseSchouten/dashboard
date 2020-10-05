@@ -24,42 +24,6 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/articles') #the url in the app.
-def articles():
-    #Create cursor
-    cursor = mysql.connection.cursor()
-
-    #Get articles
-    result = cursor.execute("SELECT * FROM dashboard.articles")
-
-    articles = cursor.fetchall()
-
-    if result > 0:
-        return render_template('articles.html', articles=articles)
-    else:
-        msg = 'No Articles Found'
-        return render_template('articles.html', msg=msg)
-
-@app.route('/article/<string:id>') #the url in the app.
-def article(id):
-    cursor = mysql.connection.cursor()
-
-    #Get articles
-    result = cursor.execute("SELECT * FROM dashboard.articles WHERE id = %s", [id])
-    article = cursor.fetchone()
-
-    return render_template('article.html', article=article)
-
-class RegisterForm(Form):
-    name = StringField('Name',[validators.Length(min=1, max=50)])
-    username = StringField('Username',[validators.Length(min=4, max=25)])
-    email = StringField('Email', [validators.Length(min=6,max=50)])
-    password = PasswordField('Password', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords do not match!'),
-    ])
-    confirm = PasswordField('Confirm Password')
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm(request.form)
@@ -137,6 +101,44 @@ def login_required(f):
             flash('Unauthorized, Please login.', 'danger')
             return redirect(url_for('login'))
     return wrap
+
+@app.route('/articles') #the url in the app.
+@login_required
+def articles():
+    #Create cursor
+    cursor = mysql.connection.cursor()
+
+    #Get articles
+    result = cursor.execute("SELECT * FROM dashboard.articles")
+
+    articles = cursor.fetchall()
+
+    if result > 0:
+        return render_template('articles.html', articles=articles)
+    else:
+        msg = 'No Articles Found'
+        return render_template('articles.html', msg=msg)
+
+@app.route('/article/<string:id>') #the url in the app.
+@login_required
+def article(id):
+    cursor = mysql.connection.cursor()
+
+    #Get articles
+    result = cursor.execute("SELECT * FROM dashboard.articles WHERE id = %s", [id])
+    article = cursor.fetchone()
+
+    return render_template('article.html', article=article)
+
+class RegisterForm(Form):
+    name = StringField('Name',[validators.Length(min=1, max=50)])
+    username = StringField('Username',[validators.Length(min=4, max=25)])
+    email = StringField('Email', [validators.Length(min=6,max=50)])
+    password = PasswordField('Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords do not match!'),
+    ])
+    confirm = PasswordField('Confirm Password')
 
 #logout
 @app.route('/logout')
