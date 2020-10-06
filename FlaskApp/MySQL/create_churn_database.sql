@@ -1,7 +1,7 @@
 #churn database
-CREATE DATABASE churn_project;
+CREATE DATABASE data;
 
-CREATE TABLE churn_project.churn (
+CREATE TABLE data.churn (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 customerID VARCHAR(12),
 `date` date,
@@ -35,7 +35,7 @@ KEY `k_3`(customerID))
 
 
 LOAD DATA INFILE '/var/lib/mysql-files/churn_data.csv' IGNORE
-INTO TABLE churn_project.churn
+INTO TABLE data.churn
            FIELDS TERMINATED BY ',' 
            LINES TERMINATED BY '\n'
            IGNORE 1 LINES
@@ -69,7 +69,7 @@ TotalCharges=IF(TotalCharges='',0,TotalCharges),
 Churn=Churn
 ;
 
-UPDATE churn_project.churn 
+UPDATE data.churn 
 SET `date`= "2020-9-20"
 ,`created`="2020-9-20"
 ,`updated`="2020-9-20"
