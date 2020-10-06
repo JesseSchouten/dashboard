@@ -1,4 +1,0 @@
-Note 1:
-in .html file {%%} (logic) is from jinja template engine. {{}} for inserting a variable or dynamic value.
-
-Note 2:
