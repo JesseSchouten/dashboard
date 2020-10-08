@@ -226,7 +226,7 @@ def edit_article(id):
         cursor = mysql.connection.cursor()
 
         #Execute
-        cursor.execute("UPDATE dashboard.articles SET title = %s, body = %s WHERE id = %s", (title, body, id))
+        cursor.execute("UPDATE dashboard.articles SET title = %s, body = %s, updated=CURRENT_TIMESTAMP() WHERE id = %s", (title, body, id))
 
         #Commit
         mysql.connection.commit()
@@ -285,7 +285,7 @@ def update_permissions(username, new_permissions):
     if username == session['username']:
         flash("We can't update our own permissions!", 'danger')
         return redirect(url_for('admin_page'))
-    cursor.execute("UPDATE dashboard.users SET permissions= %s WHERE username = %s;", [new_permissions, username])
+    cursor.execute("UPDATE dashboard.users SET permissions= %s, updated = CURRENT_TIMESTAMP() WHERE username = %s;", [new_permissions, username])
 
     #Commit
     mysql.connection.commit()
