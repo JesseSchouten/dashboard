@@ -4,8 +4,8 @@
 {% block body %}
 <!-- Page content -->
 <div class="content">
-    <h1>Dashboard</h1>
-    <p class='lead'>This page should contain some tabs with visualizations and models, to explore some data when logged into the system.</p>
+    <h1>Dashboards</h1>
+    <p class='lead'>Feel free to create new documents!</p>
     <a class="btn btn-success" href="/add_article">Add Documentation</a>
     <hr>
     <table class="table table-striped">
@@ -23,7 +23,7 @@
                 <td>{{article.title}}</td>
                 <td>{{article.author}}</td>
                 <td>{{article.create_date}}</td>
-                <td><a href="edit_article/{{article.id}}" class="btn btn-default edit_button">Edit</a></td>
+                <td><a href="edit_article/{{article.id}}" class="btn btn-default button_to_right">Edit</a></td>
                 <td>
                     <form action="{{url_for('delete_article', id=article.id)}}" method="post">
                         <input type="hidden" name="_method" value="DELETE">

@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!-- Page content -->
+<div class="content">
+    <h1>Users and permissions</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Permissions</th>
+            <th colspan="2" class="alignRight">Change permissions</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.permissions}}</td>
+                <td>
+                    <form action="{{url_for('update_permissions', username = user.username, new_permissions = 'user')}}" method="post">
+                        <input type="hidden" name="_method" value="UPDATE">
+                        <input type="submit" name="" value="User" class="button_to_right btn btn-primary">
+                    </form>
+                </td>
+                <td>
+                    <form action="{{url_for('update_permissions', username = user.username, new_permissions = 'developer')}}" method="post">
+                        <input type="hidden" name="_method" value="UPDATE">
+                        <input type="submit" name="" value="Developer" class="button_to_right btn btn-primary">
+                    </form>
+                </td>
+                <td>
+                    <form action="{{url_for('update_permissions', username = user.username, new_permissions = 'admin')}}" method="post">
+                        <input type="hidden" name="_method" value="UPDATE">
+                        <input type="submit" name="" value="Admin" class="button_to_right btn btn-primary">
+                    </form>
+                </td>
+                <td>
+                    <form action="{{url_for('delete_user', username = user.username)}}" method="post" >
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="submit" name="" value="Delete" class="button_to_right btn btn-danger">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+</table>
+</div>
+{% endblock %}

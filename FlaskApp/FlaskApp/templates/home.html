@@ -2,8 +2,13 @@
 
 {% block body %}
     <div class="jumbotron text-center">
-    <h1>Welcome to FlaskApp</h1>
-    <p class="lead">This is a personal template application</p>
+    <h1>Welcome to the application!</h1>
+    <p class="lead">
+        This webpage was created by Jesse Schouten.
+        It was created for practical and educational purposes.
+        The project is available to the public on <a href="https://github.com/JesseSchouten/dashboard" target="_blank">github</a>.
+    </p>
+
     {% if session.logged_in == NULL%}
         <a href="/register" class="btn btn-primary btn-lg">Register</a>
         <a href="/login" class="btn btn-success btn-lg">Login</a>

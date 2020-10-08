@@ -1,8 +1,10 @@
 from flask import Flask, render_template, flash, request, redirect, url_for, session, logging
 from flask_mysqldb import MySQL
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from wtforms import Form, SelectField, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
+from wtforms.validators import DataRequired
+import urllib.parse as up
 
 import sys
 
@@ -79,6 +81,8 @@ def login():
                 session['logged_in'] = True
                 session['username'] = username
                 session['permissions'] = data['permissions']
+                if data['permissions'] == 'admin':
+                    session['admin_permissions'] = True
 
                 flash('You are now logged in.', 'success')
                 return redirect(url_for('index'))
@@ -255,10 +259,71 @@ def delete_article(id):
 
     return redirect(url_for('dashboard'))
 
+@app.route('/admin_page')
+@login_required
+def admin_page():
+    #Create cursor
+    cursor = mysql.connection.cursor()
+
+    #Get articles
+    result = cursor.execute("SELECT id, name, email, username, permissions FROM dashboard.users;")
+
+    users = cursor.fetchall()
+
+    if result > 0:
+        return render_template('admin_page.html', users=users)
+    else:
+        return render_template('admin_page.html')
+
+@app.route('/update_permissions/<string:username>_<string:new_permissions>', methods=['POST'])
+@login_required
+def update_permissions(username, new_permissions):
+    #Create cursor
+    cursor = mysql.connection.cursor()
+
+    #Execute
+    if username == session['username']:
+        flash("We can't update our own permissions!", 'danger')
+        return redirect(url_for('admin_page'))
+    cursor.execute("UPDATE dashboard.users SET permissions= %s WHERE username = %s;", [new_permissions, username])
+
+    #Commit
+    mysql.connection.commit()
+
+    #Close connection
+    cursor.close()
+
+    flash("Permissions Updated", 'success')
+
+    return redirect(url_for('admin_page'))
+
+#Delete user
+@app.route('/delete_user/<string:username>', methods=['POST'])
+@login_required
+def delete_user(username):
+    #Create cursor
+    cursor = mysql.connection.cursor()
+
+    #Execute
+    if username == session['username']:
+        flash("We can't delete our own account!", 'danger')
+        return redirect(url_for('admin_page'))
+    cursor.execute('DELETE FROM dashboard.users WHERE username = %s', [username])
+
+    #Commit
+    mysql.connection.commit()
+
+    #Close connection
+    cursor.close()
+
+    flash("User succesfully deleted.", 'success')
+
+    return redirect(url_for('admin_page'))
+
 @app.route('/dashboard1')
 @login_required
 def dashboard_1():
-    if session['permissions'] == 'admin':
+    if session['permissions'] == 'admin' or session['permissions'] == 'developer':
         return render_template('dashboard1.html')
     else:
         flash('Permission Denied', 'danger')

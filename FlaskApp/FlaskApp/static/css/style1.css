@@ -43,8 +43,12 @@
   color: white;
 }
 
-.edit_button {
+.button_to_right {
     float: right;
+}
+
+.alignRight {
+  text-align: right;
 }
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {
