@@ -85,3 +85,7 @@ div.content {
     padding-top:1em;
     padding-left: 0px;
 }
+
+div.move_right{
+    right: 150px;
+}

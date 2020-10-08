@@ -5,7 +5,11 @@ from passlib.hash import sha256_crypt
 from functools import wraps
 from wtforms.validators import DataRequired
 import urllib.parse as up
-
+import pandas as pd
+from bokeh.plotting import figure
+from bokeh.embed import components
+from bokeh.plotting import figure, output_file, show
+import numpy as np
 import sys
 
 
@@ -320,11 +324,30 @@ def delete_user(username):
 
     return redirect(url_for('admin_page'))
 
-@app.route('/dashboard1')
+def test_graph():
+    x = [1, 3, 5, 7]
+    y = [2, 4, 6, 8]
+
+    p = figure(plot_width=300,plot_height=300)
+
+    p.circle(x, y, size=10, color='red', legend='circle')
+    p.line(x, y, color='blue', legend='line')
+    p.triangle(y, x, color='gold', size=10, legend='triangle')
+    p.legend.click_policy='hide'
+    script, div = components(p)
+    return script, div
+
+@app.route('/dashboard_1', methods=['GET', 'POST'])
 @login_required
-def dashboard_1():
+def dashboard1():
+    script_test_graph, div_test_graph = test_graph()
+
     if session['permissions'] == 'admin' or session['permissions'] == 'developer':
-        return render_template('dashboard1.html')
+        return render_template(
+        'dashboard1.html',
+        div_test_graph=div_test_graph,
+        script_test_graph=script_test_graph
+        )
     else:
         flash('Permission Denied', 'danger')
         return render_template('dashboard.html')

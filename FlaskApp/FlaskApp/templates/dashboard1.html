@@ -3,9 +3,50 @@
 
 {% block body %}
 <!-- Page content -->
-<div class="content">
-    <h1>Example dashboard</h1>
-    <p class='lead'>Example dashboard contents.</p>
-</div>
+    <div class="content">
+        <h1>Example dashboard</h1>
+        <p class='lead'>Key performance indicators</p>
 
+        <style>
+            h2.headings {margin-bottom: 20px;}
+            .stat-card h3{font-size: 16px; margin-top: 5px; line-height: 20px; padding-right: 45px; color: #333; text-align; left;}
+            .stat-card {position: relative; display: inline-block; background-color: #fff; width: 320px; min-height: 170px; text-align: left; padding: 15px; border-width: 1px;border-style: solid; border-color: rgb(204, 204, 204); border-image: initial; overflow: hidden;}
+            .stat-icon {position: absolute;top: 0px;right: 0px;width: 60px;height: 60px;line-height: 60px;text-align: center;}
+            .stat-icon.right {right: 0px;}
+            .stat-icon span {position: absolute;z-index: 8;top: -40px; left: 5px; width: 100px;height: 100px; line-height: 120px;border-radius: 50%;}
+            .stat-icon i {padding-left: 15px; color: rgb(255, 255, 255); z-index: 9; font-size: 24px;}
+            .bg-target {background-color: #E07000;}
+            .txt-target {color: #E07000;}
+            .bg-ontrack {background-color: #007613;}
+            .txt-ontrack {color: #007613;}
+            .bg-failing {background-color: #D43E3A;}
+            .txt-failing {color: #D43E3A;}
+            .bg-measure {background-color: #186EA5;}
+            .txt-measure {color: #186EA5;}
+            .stat-card h4.stat-num {font-size: 45px; text-align: left;}
+            .stat-card .subtext {font-size: 15px;}
+            .stat-card .source {font-size: 12px; margin-top: 15px;}
+            .stat-card .open-btn {margin-top: 15px;}
+        </style>
+
+        <div class="stat-card">
+            <div class="stat-icon right"><span class="bg-ontrack"></span><i class="glyphicon glyphicon-home"></i></div>
+                <h3>Customer base</h3>
+                <h4 class="stat-num"><span class="txt-ontrack">60000</span></h4>
+            <div class="subtext"><i class="glyphicon glyphicon-triangle-top txt-ontrack"></i> of yearly <strong>goal: 100000</strong></div>
+        </div>
+
+        <div class="stat-card" "move_right">
+            <div class="stat-icon right"><span class="bg-ontrack"></span><i class="glyphicon glyphicon-home"></i></div>
+                <h3>Retention percentage</h3>
+                <h4 class="stat-num"><span class="txt-ontrack">88.8</span></h4>
+            <div class="subtext"><i class="glyphicon glyphicon-triangle-top txt-ontrack"></i> percent occupied of <strong>goal: 100%</strong></div>
+        </div>
+
+        <p class='lead'>Graphs</p>
+        <div>
+            {{div_test_graph | safe}}
+            {{script_test_graph |safe}}
+        </div>
+    </div>
 {% endblock %}
