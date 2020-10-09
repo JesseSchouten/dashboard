@@ -5,6 +5,7 @@ FlaskApp/FlaskApp/venv/
 *.pyc
 FlaskApp/FlaskApp/credentials/mysql_credentials.py
 /FlaskApp/run.py
+/FlaskApp/FlaskApp/config.py
 #folders
 *.egg-info/
 __pycache__/
