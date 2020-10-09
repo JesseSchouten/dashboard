@@ -5,3 +5,5 @@ FlaskApp/FlaskApp/venv/
 FlaskApp/FlaskApp/credentials/mysql_credentials.py
 #folders
 *.egg-info/
+#files
+*.wsgi

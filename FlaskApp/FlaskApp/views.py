@@ -12,11 +12,9 @@ from bokeh.embed import components
 from bokeh.plotting import figure, output_file, show
 import numpy as np
 import sys
+from config import Config, TestingConfig, DevelopmentConfig, ProductionConfig
 
-app.config['MYSQL_HOST'] = "localhost"
-app.config['MYSQL_USER'] = "root"
-app.config['MYSQL_PASSWORD'] = "Alkmaar12!"
-app.config['MYSQL_CURSORCLASS'] = "DictCursor"
+app.config.from_object("DevelopmentConfig")
 
 # init MYSQL
 mysql = MySQL(app)
