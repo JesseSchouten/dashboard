@@ -323,9 +323,9 @@ def test_graph():
 
     p = figure(plot_width=300,plot_height=300)
 
-    p.circle(x, y, size=10, color='red', legend='circle')
-    p.line(x, y, color='blue', legend='line')
-    p.triangle(y, x, color='gold', size=10, legend='triangle')
+    p.circle(x, y, size=10, color='red', legend_label='circle')
+    p.line(x, y, color='blue', legend_label='line')
+    p.triangle(y, x, color='gold', size=10, legend_label='triangle')
     p.legend.click_policy='hide'
     script, div = components(p)
     return script, div
