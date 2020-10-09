@@ -3,3 +3,5 @@ FlaskApp/venv/
 FlaskApp/FlaskApp/venv/
 #.py files
 FlaskApp/FlaskApp/credentials/mysql_credentials.py
+#folders
+*.egg-info/
