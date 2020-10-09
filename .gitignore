@@ -6,6 +6,6 @@ FlaskApp/FlaskApp/credentials/mysql_credentials.py
 /FlaskApp/run.py
 #folders
 *.egg-info/
-/FlaskApp/FlaskApp/__pycache__/
+__pycache__/
 #files
 *.wsgi
