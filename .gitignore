@@ -2,10 +2,11 @@
 FlaskApp/venv/
 FlaskApp/FlaskApp/venv/
 #.py files
+*.pyc
 FlaskApp/FlaskApp/credentials/mysql_credentials.py
 /FlaskApp/run.py
 #folders
 *.egg-info/
-__pycache__/
+FlaskApp/FlaskApp/__pycache__/
 #files
 *.wsgi
