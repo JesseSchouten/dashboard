@@ -10,6 +10,7 @@ Docstrings according to Restructured Text (;REST):
 from flask import Flask
 app = Flask(__name__)
 
+#in development by default
 from config import TestingConfig, DevelopmentConfig, ProductionConfig
 app.config.from_object(DevelopmentConfig)
 
