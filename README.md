@@ -27,8 +27,10 @@ To get the dashboard to run locally:
 	** step 5c: Create the virtualenv, type in terminal: virtualenv venv.
 	** step 5d: Install the required packages, type in terminal: pip3 install requirements.txt 
 	* step 6: enter the virtual environment, this can differ based on the OS. Try: source venv/bin/activate
-	* step 7: Run the Flask application in the \dashboard\FlaskApp\FlaskApp directory, type in terminal: python3 app.py
+	* step 7: Type in terminal [WINDOWS]: set FLASK_APP = FlaskApp, Type in terminal [LINUX]: export FLASK_APP = FlaskApp
+	* step 8: Type in terminal [WINDOWS]: set FLASK_ENV = production, Type in terminal [LINUX]: export FLASK_ENV = production
+	* step 9: Run the Flask application using the FlaskApp folder in dashboard/FlaskApp as a module, type in terminal: flask run
 
 Now paste the following in your browser: http://localhost:5005//.
-
+Visit http:/104.248.92.134 to view the final result!
 ## Result snapshot

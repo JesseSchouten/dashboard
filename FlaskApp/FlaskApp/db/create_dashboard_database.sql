@@ -1,6 +1,5 @@
 #dashboard database
 CREATE DATABASE dashboard;
-DROP TABLE dashboard.articles;
 
 CREATE TABLE dashboard.users(
 id INT AUTO_INCREMENT PRIMARY KEY,
