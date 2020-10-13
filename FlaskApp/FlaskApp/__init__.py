@@ -14,4 +14,11 @@ app = Flask(__name__)
 from config import TestingConfig, DevelopmentConfig, ProductionConfig
 app.config.from_object(DevelopmentConfig)
 
+#Initialize database in
+from flask_mysqldb import MySQL
+
+# init MYSQL
+db = MySQL()
+db.init_app(app)
+
 import FlaskApp.views

@@ -1,7 +1,6 @@
 # Description
-THIS PROJECT IS A WORK IN PROGRESS.
-
 This is a Flask template dashboard. Special thanks to traversy media (https://www.youtube.com/channel/UC29ju8bIPH5as8OGnQzwJyA) for the free tutorials (https://www.youtube.com/watch?v=zRwy8gtgJ1A). 
+Visit https:/104.248.92.134 to view the end result!
 
 ## Tools used:
    * Python
@@ -11,9 +10,9 @@ This is a Flask template dashboard. Special thanks to traversy media (https://ww
    * CSS
 
 ## Prerequisites:
-	* MySQL database instance
-	* Python3 
-	* Github
+   * MySQL (:https://dev.mysql.com/downloads/workbench/)
+   * Python3 (:https://www.anaconda.com/products/individual)
+   * Git (https://desktop.github.com/)
 
 ## Reproducing the results:
 To get the dashboard to run locally:
@@ -33,5 +32,3 @@ To get the dashboard to run locally:
 	* step 10: Run the Flask application using the FlaskApp folder in dashboard/FlaskApp as a module, type in terminal: flask run
 
 Now paste the following in your browser: http://localhost:5005//.
-Visit http:/104.248.92.134 to view the final result!
-## Result snapshot

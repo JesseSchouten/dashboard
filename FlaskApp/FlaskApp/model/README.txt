@@ -1,0 +1,1 @@
+For machine learning projects, this directory should contain the trained models. Example: a .pkl object saved from a python notebook.

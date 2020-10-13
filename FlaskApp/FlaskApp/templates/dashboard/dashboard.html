@@ -25,7 +25,7 @@
                 <td>{{article.create_date}}</td>
                 <td><a href="edit_article/{{article.id}}" class="btn btn-default button_to_right">Edit</a></td>
                 <td>
-                    <form action="{{url_for('delete_article', id=article.id)}}" method="post">
+                    <form action="{{url_for('delete_article_action.delete_article', id=article.id)}}" method="post">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="submit" name="" value="Delete" class="btn btn-danger">
                     </form>

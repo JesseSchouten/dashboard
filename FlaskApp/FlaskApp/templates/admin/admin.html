@@ -23,25 +23,25 @@
                 <td>{{user.username}}</td>
                 <td>{{user.permissions}}</td>
                 <td>
-                    <form action="{{url_for('update_permissions', username = user.username, new_permissions = 'user')}}" method="post">
+                    <form action="{{url_for('update_permissions_action.update_permissions', username = user.username, new_permissions = 'user')}}" method="post">
                         <input type="hidden" name="_method" value="UPDATE">
                         <input type="submit" name="" value="User" class="button_to_right btn btn-primary">
                     </form>
                 </td>
                 <td>
-                    <form action="{{url_for('update_permissions', username = user.username, new_permissions = 'developer')}}" method="post">
+                    <form action="{{url_for('update_permissions_action.update_permissions', username = user.username, new_permissions = 'developer')}}" method="post">
                         <input type="hidden" name="_method" value="UPDATE">
                         <input type="submit" name="" value="Developer" class="button_to_right btn btn-primary">
                     </form>
                 </td>
                 <td>
-                    <form action="{{url_for('update_permissions', username = user.username, new_permissions = 'admin')}}" method="post">
+                    <form action="{{url_for('update_permissions_action.update_permissions', username = user.username, new_permissions = 'admin')}}" method="post">
                         <input type="hidden" name="_method" value="UPDATE">
                         <input type="submit" name="" value="Admin" class="button_to_right btn btn-primary">
                     </form>
                 </td>
                 <td>
-                    <form action="{{url_for('delete_user', username = user.username)}}" method="post" >
+                    <form action="{{url_for('delete_user_action.delete_user', username = user.username)}}" method="post" >
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="submit" name="" value="Delete" class="button_to_right btn btn-danger">
                     </form>
