@@ -19,7 +19,7 @@ To get the dashboard to run locally:
 
     - step 1: Open the terminal.
 	- step 2: Type the following in the terminal: git clone https://github.com/JesseSchouten/dashboard
-	- step 3: Create the necassary database structure, this is given in:\dashboard\FlaskApp\FlaskApp\db\create_dashboard_database.sql
+	- step 3: Create the necassary database structure, this is provided in:\dashboard\FlaskApp\FlaskApp\db\create_dashboard_database.sql
 	- step 4: Create a config.py file in dashboard/FlaskApp directory, take example_config.py as an example. Make sure the credentials in the file align with the MySQL database credentials.
 	- step 5: Create a python3 virtual environment in the \dashboard\FlaskApp\FlaskApp directory.
 		- step 5a: Install the virtualenv library in pip3, type in terminal: pip3 install virtualenv 
