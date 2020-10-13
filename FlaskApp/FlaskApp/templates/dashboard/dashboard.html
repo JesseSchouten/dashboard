@@ -22,7 +22,7 @@
                 <td>{{article.id}}</td>
                 <td>{{article.title}}</td>
                 <td>{{article.author}}</td>
-                <td>{{article.create_date}}</td>
+                <td>{{article.created}}</td>
                 <td><a href="edit_article/{{article.id}}" class="btn btn-default button_to_right">Edit</a></td>
                 <td>
                     <form action="{{url_for('delete_article_action.delete_article', id=article.id)}}" method="post">

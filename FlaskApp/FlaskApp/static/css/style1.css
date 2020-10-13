@@ -11,6 +11,20 @@
     position:relative;
 }
 
+.dropdown-menu {
+    width: 200px !important;
+    border-radius: 0px !important;
+}
+
+.dropdown-menu .nav-link {
+    color: #000 !important;
+    font-size: 0.9rem !important;
+}
+
+.dropdown-menu .nav-link:hover {
+    background: #eee;
+}
+
 /* The side navigation menu */
 .sidebar {
   margin: 0;
@@ -88,4 +102,8 @@ div.content {
 
 div.move_right{
     right: 150px;
+}
+
+div.move_left{
+    right: 30px;
 }

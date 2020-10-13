@@ -3,16 +3,16 @@ This is a Flask template dashboard. Special thanks to traversy media (https://ww
 Visit https:/104.248.92.134 to view the end result!
 
 ## Tools used:
-   * Python
-   * Flask
-   * GitHub
-   * HTML
-   * CSS
+    * Python
+    * Flask
+    * GitHub
+    * HTML
+    * CSS
 
 ## Prerequisites:
-   * MySQL (:https://dev.mysql.com/downloads/workbench/)
-   * Python3 (:https://www.anaconda.com/products/individual)
-   * Git (https://desktop.github.com/)
+    * MySQL (:https://dev.mysql.com/downloads/workbench/)
+    * Python3 (:https://www.anaconda.com/products/individual)
+    * Git (https://desktop.github.com/)
 
 ## Reproducing the results:
 To get the dashboard to run locally:
@@ -31,4 +31,4 @@ To get the dashboard to run locally:
 	* step 9: Type in terminal from /dashboard/FlaskApp directory: pip install -e .
 	* step 10: Run the Flask application using the FlaskApp folder in dashboard/FlaskApp as a module, type in terminal: flask run
 
-Now paste the following in your browser: http://localhost:5005//.
+Now paste the following in your browser: http://localhost:5005//
