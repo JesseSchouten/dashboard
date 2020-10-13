@@ -3,11 +3,11 @@ This is a Flask template dashboard. Special thanks to traversy media (https://ww
 Visit https:/104.248.92.134 to view the end result!
 
 ## Tools used:
-    * Python
-    * Flask
-    * GitHub
-    * HTML
-    * CSS
+   * Python
+   * Flask
+   * GitHub
+   * HTML
+   * CSS
 
 ## Prerequisites:
     * MySQL (:https://dev.mysql.com/downloads/workbench/)
@@ -15,6 +15,8 @@ Visit https:/104.248.92.134 to view the end result!
     * Git (https://desktop.github.com/)
 
 ## Reproducing the results:
+To get the dashboard to run locally:
+
 	* step 1: Open the terminal.
 	* step 2: Type the following in the terminal: git clone https://github.com/JesseSchouten/dashboard
 	* step 3: Create the necassary database structure, this is given in:\dashboard\FlaskApp\FlaskApp\db\create_dashboard_database.sql
