@@ -33,3 +33,5 @@ To get the dashboard to run locally:
 	- step 10: Run the Flask application using the FlaskApp folder in dashboard/FlaskApp as a module, type in terminal: flask run
 
 Now paste the following in your browser: http://localhost:5005//
+
+EDIT [2020-11-14]: The mySQL database configuration broke down. Changing the user from 'root' to 'mysql' in /etc/mysql/mysql.conf.d/mysqld.cnf and upgrading and updating the linux server solved the issue. 
